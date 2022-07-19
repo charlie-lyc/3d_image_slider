@@ -73,5 +73,83 @@
         </label>
     </section>
 
+    <script type="text/javascript" >
+        /* 
+            메인페이지 제작의뢰 슬라이드 자동 실행
+        */
+        const nextSlide = () => {
+            const inputElements = document.getElementsByTagName('input')
+            const radioButtons = []
+            for (let i = 0; i < inputElements.length; i ++) {
+                if (inputElements[i].type === 'radio') {
+                    radioButtons.push(inputElements[i])
+                }
+            }
+            for (let j = 0; j < radioButtons.length; j ++) {
+                if (radioButtons[j].checked) {
+                    radioButtons[j].checked = false
+                    if (j + 1 === radioButtons.length) {
+                        radioButtons[0].checked = true
+                    } else {
+                        radioButtons[j+1].checked = true
+                    }
+                    break
+                }
+            }
+        }
+        // const auto = false
+        const auto = true
+        const intervalTime = 5000
+        let slideInterval
+        if (auto) {
+            slideInterval = setInterval(nextSlide, intervalTime)
+        }
+        /*
+            제작의뢰 슬라이드 자동 실행 중 클릭시 실행 간격 재조정
+        */
+        /* In local */
+        if (auto) {
+            for (let k = 1; k < 6; k ++) {
+                document.getElementById(`slide${k}`).addEventListener('click', () => {
+                    clearInterval(slideInterval)
+                    slideInterval = setInterval(nextSlide, intervalTime)
+                })
+            }
+        }
+        /* In Browser (using jQuery) */
+        // if (auto) {
+        //     $('#slide1').ready(function() {
+        //         document.getElementById(`slide1`).addEventListener('click', function () {
+        //             clearInterval(slideInterval)
+        //             slideInterval = setInterval(nextSlide, intervalTime)
+        //         })
+        //     })
+        //     $('#slide2').ready(function() {
+        //         document.getElementById(`slide2`).addEventListener('click', function () {
+        //             clearInterval(slideInterval)
+        //             slideInterval = setInterval(nextSlide, intervalTime)
+        //         })
+        //     })
+        //     $('#slide3').ready(function() {
+        //         document.getElementById(`slide3`).addEventListener('click', function () {
+        //             clearInterval(slideInterval)
+        //             slideInterval = setInterval(nextSlide, intervalTime)
+        //         })
+        //     })
+        //     $('#slide4').ready(function() {
+        //         document.getElementById(`slide4`).addEventListener('click', function () {
+        //             clearInterval(slideInterval)
+        //             slideInterval = setInterval(nextSlide, intervalTime)
+        //          })
+        //     })
+        //     $('#slide5').ready(function() {
+        //         document.getElementById(`slide5`).addEventListener('click', function () {
+        //             clearInterval(slideInterval)
+        //             slideInterval = setInterval(nextSlide, intervalTime)
+        //         })
+        //     })
+        // }
+    </script>
+
 </body>
 </html>
